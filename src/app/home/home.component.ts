@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { AsyncPipe, DatePipe, NgFor } from '@angular/common';
+import { Component, inject } from '@angular/core';
 
+import { FooterComponent } from '../shared/components/footer/footer.component';
 import { HomeService } from './home.service';
 
 @Component({
+  standalone: true,
+  imports: [AsyncPipe, DatePipe, NgFor, FooterComponent],
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
@@ -10,7 +14,5 @@ import { HomeService } from './home.service';
 export class HomeComponent {
   now = Date.now();
 
-  features$ = this.homeService.features$;
-
-  constructor(private homeService: HomeService) {}
+  features$ = inject(HomeService).features$;
 }

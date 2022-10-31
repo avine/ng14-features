@@ -1,7 +1,12 @@
+import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { AbstractControl, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
+import { AbstractControl, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+
+import { FooterComponent } from '../shared/components/footer/footer.component';
 
 @Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, JsonPipe, NgClass, NgIf, FooterComponent],
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
@@ -13,12 +18,6 @@ export class SignupComponent {
     cgu: [false, [Validators.requiredTrue]],
   });
 
-  email = this.signup.get('email') as UntypedFormControl;
-
-  password = this.signup.get('password') as UntypedFormControl;
-
-  cgu = this.signup.get('cgu') as UntypedFormControl;
-
   getClasses(control: AbstractControl) {
     return {
       'is-invalid': control.touched && control.invalid,
@@ -26,14 +25,14 @@ export class SignupComponent {
     };
   }
 
-  constructor(private formBuilder: UntypedFormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {}
 
   resetEmail() {
     this.signup.get('email')?.reset();
   }
 
   disableEmail() {
-    this.email[this.email.enabled ? 'disable' : 'enable']();
+    this.signup.controls.email[this.signup.controls.email.enabled ? 'disable' : 'enable']();
   }
 
   submit() {
