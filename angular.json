@@ -88,9 +88,18 @@
             "styles": ["src/styles.css"],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
         }
       }
     }
   },
-  "defaultProject": "ng14-features"
+  "defaultProject": "ng14-features",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
