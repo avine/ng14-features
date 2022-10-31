@@ -1,0 +1,78 @@
+<form [formGroup]="signup" (ngSubmit)="submit()">
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input formControlName="email" class="form-control" id="email" [ngClass]="getValidationClasses(email)" />
+    <div class="invalid-feedback">
+      <div *ngIf="email.errors?.['required']">The field is required</div>
+      <div *ngIf="email.errors?.['email']">Enter a valid email</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input
+      formControlName="password"
+      type="password"
+      class="form-control"
+      id="password"
+      [ngClass]="getValidationClasses(password)"
+    />
+    <div class="invalid-feedback">
+      <div *ngIf="password.errors?.['required']">The field is required</div>
+      <div *ngIf="password.errors?.['minlength'] as error">
+        Enter a valid password with at least {{ error.requiredLength }} characters
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 form-check">
+    <input
+      formControlName="eula"
+      type="checkbox"
+      class="form-check-input"
+      id="eula"
+      [ngClass]="getValidationClasses(eula)"
+    />
+    <label class="form-check-label" for="eula">Accept end-user license agreement</label>
+    <div class="invalid-feedback">
+      <div *ngIf="eula.errors?.['required']">You must accept EULA</div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="signup.invalid || signup.disabled">Submit</button>
+</form>
+
+<div class="my-4 d-flex align-items-center">
+  Email form control:
+  <div class="btn-group ms-2" role="group">
+    <button (click)="resetEmail()" class="btn btn-secondary btn-sm">Reset</button>
+    <button
+      class="btn btn-sm"
+      [ngClass]="{ 'btn-secondary': email.enabled, 'btn-light': email.disabled }"
+      (click)="disableEmail()"
+    >
+      {{ email.enabled ? 'Disable' : 'Enable' }}
+    </button>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-6">
+    <div class="card h-100">
+      <div class="card-header">Form value</div>
+      <pre class="card-body mb-0" style="font-size: 13px">{{ signup.value | json }}</pre>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="card h-100">
+      <div class="card-header">Form errors</div>
+      <pre class="card-body mb-0" style="font-size: 13px">
+<ng-container *ngIf="email.errors">email {{ email.errors | json }}
+</ng-container><ng-container *ngIf="password.errors">password {{ password.errors | json }}
+</ng-container><ng-container *ngIf="eula.errors">eula {{ eula.errors | json }}</ng-container></pre>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

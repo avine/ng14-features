@@ -1,0 +1,18 @@
+<div>{{ now | date }}</div>
+
+<div class="row">
+  <div *ngFor="let feature of features$ | async" class="col-12 col-lg-6 g-4">
+    <div class="card">
+      <div class="card-header">Feature</div>
+
+      <div class="card-body">
+        <h5 class="card-title mb-3">{{ feature.title }}</h5>
+        <a [routerLink]="feature.path" class="btn btn-outline-primary btn-sm">More infos</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>
