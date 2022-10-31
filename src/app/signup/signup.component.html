@@ -1,0 +1,65 @@
+<form [formGroup]="signup" (ngSubmit)="submit()">
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input formControlName="email" class="form-control" id="email" [ngClass]="getClasses(email)" />
+    <div class="invalid-feedback">
+      <div *ngIf="email.errors?.['required']">The field is required</div>
+      <div *ngIf="email.errors?.['email']">Enter a valid email</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input
+      formControlName="password"
+      type="password"
+      class="form-control"
+      id="password"
+      [ngClass]="getClasses(password)"
+    />
+    <div class="invalid-feedback">
+      <div *ngIf="password.errors?.['required']">The field is required</div>
+      <div *ngIf="password.errors?.['minlength'] as error">
+        Enter a valid password with at least {{ error.requiredLength }} characters
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 form-check">
+    <input formControlName="cgu" type="checkbox" class="form-check-input" id="cgu" [ngClass]="getClasses(cgu)" />
+    <label class="form-check-label" for="cgu">Accept CGU</label>
+    <div class="invalid-feedback">
+      <div *ngIf="cgu.errors?.['required']">You must accept CGU</div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="signup.invalid || signup.disabled">Submit</button>
+</form>
+
+<div class="mt-4 btn-group" role="group" aria-label="Basic example">
+  <button (click)="resetEmail()" class="btn btn-secondary btn-sm">Reset email form control</button>
+  <button (click)="disableEmail()" class="btn btn-secondary btn-sm">
+    {{ email.enabled ? 'Disable' : 'Enable' }} email form control
+  </button>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <div class="card mt-4">
+      <div class="card-header">Form value</div>
+      <pre class="card-body mb-0">{{ signup.value | json }}</pre>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="card mt-4">
+      <div class="card-header">Form errors</div>
+      <pre class="card-body mb-0">
+<ng-container *ngIf="email.errors">email {{ email.errors | json }}
+</ng-container><ng-container *ngIf="password.errors">password {{ password.errors | json }}
+</ng-container><ng-container *ngIf="cgu.errors">cgu {{ cgu.errors | json }}</ng-container></pre>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,15 @@
+<div>{{ now | date }}</div>
+
+<div class="row">
+  <div *ngFor="let feature of features$ | async" class="col-12 col-lg-6 g-4">
+    <div class="card">
+      <div class="card-header">Feature</div>
+
+      <div class="card-body">
+        <h5 class="card-title">{{ feature }}</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
