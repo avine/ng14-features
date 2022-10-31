@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -13,11 +13,11 @@ export class SignupComponent {
     cgu: [false, [Validators.requiredTrue]],
   });
 
-  email = this.signup.get('email') as FormControl;
+  email = this.signup.get('email') as UntypedFormControl;
 
-  password = this.signup.get('password') as FormControl;
+  password = this.signup.get('password') as UntypedFormControl;
 
-  cgu = this.signup.get('cgu') as FormControl;
+  cgu = this.signup.get('cgu') as UntypedFormControl;
 
   getClasses(control: AbstractControl) {
     return {
@@ -26,7 +26,7 @@ export class SignupComponent {
     };
   }
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: UntypedFormBuilder) {}
 
   resetEmail() {
     this.signup.get('email')?.reset();
