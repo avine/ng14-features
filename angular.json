@@ -98,8 +98,9 @@
       }
     }
   },
-  "defaultProject": "ng14-features",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
