@@ -1,10 +1,15 @@
 <form [formGroup]="signup" (ngSubmit)="submit()">
   <div class="mb-3">
     <label for="email" class="form-label">Email address</label>
-    <input formControlName="email" class="form-control" id="email" [ngClass]="getValidationClasses(email)" />
+    <input
+      formControlName="email"
+      class="form-control"
+      id="email"
+      [ngClass]="getValidationClasses(signup.controls.email)"
+    />
     <div class="invalid-feedback">
-      <div *ngIf="email.errors?.['required']">The field is required</div>
-      <div *ngIf="email.errors?.['email']">Enter a valid email</div>
+      <div *ngIf="signup.controls.email.errors?.['required']">The field is required</div>
+      <div *ngIf="signup.controls.email.errors?.['email']">Enter a valid email</div>
     </div>
   </div>
 
@@ -15,11 +20,11 @@
       type="password"
       class="form-control"
       id="password"
-      [ngClass]="getValidationClasses(password)"
+      [ngClass]="getValidationClasses(signup.controls.password)"
     />
     <div class="invalid-feedback">
-      <div *ngIf="password.errors?.['required']">The field is required</div>
-      <div *ngIf="password.errors?.['minlength'] as error">
+      <div *ngIf="signup.controls.password.errors?.['required']">The field is required</div>
+      <div *ngIf="signup.controls.password.errors?.['minlength'] as error">
         Enter a valid password with at least {{ error.requiredLength }} characters
       </div>
     </div>
@@ -31,11 +36,11 @@
       type="checkbox"
       class="form-check-input"
       id="eula"
-      [ngClass]="getValidationClasses(eula)"
+      [ngClass]="getValidationClasses(signup.controls.eula)"
     />
     <label class="form-check-label" for="eula">Accept end-user license agreement</label>
     <div class="invalid-feedback">
-      <div *ngIf="eula.errors?.['required']">You must accept EULA</div>
+      <div *ngIf="signup.controls.eula.errors?.['required']">You must accept EULA</div>
     </div>
   </div>
 
@@ -48,10 +53,10 @@
     <button (click)="resetEmail()" class="btn btn-secondary btn-sm">Reset</button>
     <button
       class="btn btn-sm"
-      [ngClass]="{ 'btn-secondary': email.enabled, 'btn-light': email.disabled }"
+      [ngClass]="{ 'btn-secondary': signup.controls.email.enabled, 'btn-light': signup.controls.email.disabled }"
       (click)="disableEmail()"
     >
-      {{ email.enabled ? 'Disable' : 'Enable' }}
+      {{ signup.controls.email.enabled ? 'Disable' : 'Enable' }}
     </button>
   </div>
 </div>
@@ -68,9 +73,9 @@
     <div class="card h-100">
       <div class="card-header">Form errors</div>
       <pre class="card-body mb-0" style="font-size: 13px">
-<ng-container *ngIf="email.errors">email {{ email.errors | json }}
-</ng-container><ng-container *ngIf="password.errors">password {{ password.errors | json }}
-</ng-container><ng-container *ngIf="eula.errors">eula {{ eula.errors | json }}</ng-container></pre>
+<ng-container *ngIf="signup.controls.email.errors">email {{ signup.controls.email.errors | json }}
+</ng-container><ng-container *ngIf="signup.controls.password.errors">password {{ signup.controls.password.errors | json }}
+</ng-container><ng-container *ngIf="signup.controls.eula.errors">eula {{ signup.controls.eula.errors | json }}</ng-container></pre>
     </div>
   </div>
 </div>

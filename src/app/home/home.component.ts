@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { AsyncPipe, DatePipe, NgFor } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { RouterLinkWithHref, RouterOutlet } from '@angular/router';
 
+import { FooterComponent } from '../shared/components/footer/footer.component';
 import { HomeService } from './home.service';
 
 @Component({
+  standalone: true,
+  imports: [AsyncPipe, DatePipe, NgFor, RouterLinkWithHref, RouterOutlet, FooterComponent],
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  now = Date.now();
+  protected now = Date.now();
 
-  features$ = this.homeService.features$;
-
-  constructor(private homeService: HomeService) {}
+  protected features$ = inject(HomeService).features$;
 }

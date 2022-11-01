@@ -1,11 +1,14 @@
 import { APP_NAME } from 'src/app/app.provider';
 
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 
 @Component({
+  standalone: true,
+  imports: [RouterLinkWithHref, RouterLinkActive],
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  constructor(@Inject(APP_NAME) public appName: string) {}
+  protected appName = inject(APP_NAME);
 }
