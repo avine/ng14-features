@@ -1,11 +1,11 @@
 import { APP_NAME } from 'src/app/app.provider';
 
 import { Component, inject } from '@angular/core';
-import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
+import { RouterLinkActive, RouterLink } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [RouterLinkWithHref, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive],
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
