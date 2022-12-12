@@ -16,7 +16,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(APP_ROUTES),
     {
       provide: APP_NAME,
-      useValue: 'ng14',
+      useValue: 'ng15',
     },
   ],
 }).catch((err) => console.error(err));
